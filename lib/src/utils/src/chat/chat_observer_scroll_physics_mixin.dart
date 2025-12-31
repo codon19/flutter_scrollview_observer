@@ -17,6 +17,7 @@ mixin ChatObserverScrollPhysicsMixin on ScrollPhysics {
     required bool isScrolling,
     required double velocity,
   }) {
+    print('=====adjustPositionForNewDimensions=====');
     final isNeedFixedPosition = observer.innerIsNeedFixedPosition;
     observer.innerIsNeedFixedPosition = false;
 
@@ -27,9 +28,7 @@ mixin ChatObserverScrollPhysicsMixin on ScrollPhysics {
       velocity: velocity,
     );
 
-    if (newPosition.extentBefore <= observer.fixedPositionOffset ||
-        !isNeedFixedPosition ||
-        observer.isRemove) {
+    if (!isNeedFixedPosition || observer.isRemove) {
       _handlePositionCallback(ChatScrollObserverHandlePositionResultModel(
         type: ChatScrollObserverHandlePositionType.none,
         mode: observer.innerMode,
